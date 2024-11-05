@@ -1,14 +1,15 @@
 import os
 import pandas as pd
 import pyarrow.parquet as pq
+import pyarrow as pa
 from concurrent.futures import ThreadPoolExecutor
 
 class CSVHandler:
-    def __init__(self,  encoding=''):
-
-        self.encoding =  encoding if  encoding else 'ISO-8859-1'
-        self.chunk_size = 150000
-        self.max_workers = 4  # Maximum number of threads
+    def __init__(self,  encoding='ISO-8859-1', max_workers=4, chunk_size=150000, logger=None):
+        self.encoding =  encoding
+        self.chunk_size = chunk_size
+        self.max_workers = max_workers  # Maximum number of threads
+        self.logger=logger
 
     def read_csv_file(self, csv_file, usecols=[]):
         """
@@ -55,4 +56,37 @@ class CSVHandler:
         except Exception as e:
             print(f"Error reading the Parquet file: {e}")
             raise ValueError(f"Could not read file {file_path}")
+
+
+    def read_parquet_file(self, file_path, columns=[]):
+        """
+        Reads a Parquet file and returns a DataFrame.
+
+        Parameters:
+        file_path (str): The path to the Parquet file.
+
+        Returns:
+        pd.DataFrame: A DataFrame containing the data from the Parquet file.
+        """
+        try:
+            #df = pd.read_parquet(file_path, columns=columns, engine='pyarrow')
+            parquet_df = pq.read_table(file_path, columns=columns).to_pandas()
+            return parquet_df
+        except Exception as e:
+            print(f"Error reading the Parquet file: {e}")
+            raise ValueError(f"Could not read file {file_path}")
             
+    def write_parquet_file(self, df, output_file, encoding_col=[]):
+        if encoding_col:        
+            # Apply encoding to specified string columns
+            for col in encoding_col:
+                df[col] = df[col].astype(str).str.encode(self.encoding).str.decode(self.encoding)
+        
+        # Create a ParquetWriter outside the loop for appending
+        with pq.ParquetWriter(output_file, pa.Table.from_pandas(df.iloc[0:1]).schema, compression='snappy') as writer:
+            # Write the DataFrame to a Parquet file in chunks
+            for i in range(0, len(df), self.chunk_size):
+                chunk = df.iloc[i:i + self.chunk_size]
+                table = pa.Table.from_pandas(chunk)
+                writer.write_table(table)
+        print("Successfully written : ", os.path.basename(output_file))

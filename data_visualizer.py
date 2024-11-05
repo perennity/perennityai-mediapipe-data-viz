@@ -11,7 +11,7 @@ def parse_arguments():
     parser.add_argument('--output_dir', type=str, required=True, help='Directory to save output animations.')
     
     # Format and file handling
-    parser.add_argument('--data_input_format', type=str, choices=['csv', 'tfrecord'], default='csv', 
+    parser.add_argument('--data_input_format', type=str, choices=['csv', 'tfrecord', 'parquet'], default='csv', 
                         help='Input file format: "csv" or "tfrecord".')
     
     # Visualization options
@@ -19,11 +19,15 @@ def parse_arguments():
                     help='CSV file in input to visualize.')
     parser.add_argument('--tfrecord_file', type=str, default='', 
                         help='TFRecord file in input to visualize.')
+    parser.add_argument('--parquet_file', type=str, default='', 
+                    help='parquet file in input to visualize.')
     
     parser.add_argument('--csv_file_index', type=int, default=-1, 
                         help='Index of CSV file in input directory to visualize.')
     parser.add_argument('--tf_file_index', type=int, default=-1, 
                         help='Index of TFRecord file in input directory to visualize.')
+    parser.add_argument('--parquet_file_index', type=int, default=-1, 
+                        help='Index of Parquet file in input directory to visualize.')
     parser.add_argument('--animation_name', type=str, default='', help='Custom name for the output animation file.')
     parser.add_argument('--output_format', type=str, default='.gif', choices=['.gif', '.mp4'], 
                         help='Format of the output animation, e.g., ".gif" or ".mp4".')
@@ -44,7 +48,6 @@ def main():
             input_file=args.input_file,
             input_dir=args.input_dir,
             output_dir=args.output_dir,
-            data_input_format=args.data_input_format,
             encoding=args.encoding,
             verbose=args.verbose
         )
@@ -85,6 +88,23 @@ def main():
                 )
             else:
                 print("TFrecord_file Invalid input!")
+        elif args.data_input_format == 'parquet':
+            if args.parquet_file_index >= 0:
+                animation = visualizer.visualize_data(
+                    parquet_file_index=args.parquet_file_index,
+                    animation_name=args.animation_name,
+                    write=args.write,
+                    output_format=args.output_format
+                )
+            elif args.tfrecord_file or '.parquet' in args.input_file:
+                animation = visualizer.visualize_data(
+                    parquet_file=args.parquet_file,
+                    animation_name=args.animation_name,
+                    write=args.write,
+                    output_format=args.output_format
+                )
+            else:
+                print("Parquet_file Invalid input!")
     
     except ValueError as e:
         print(f"Error: {e}")

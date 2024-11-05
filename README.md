@@ -5,7 +5,7 @@
 - Animation Creation: Generate animations from landmark data for face, hand, and pose.
 - Visualization of Individual Components: Separate visualizations for hands, face, and body pose landmarks.
 - Combined Image Output: Overlays landmarks for all components in a single image.
-- Support for Multiple File Formats: Compatible with .csv and .tfrecord file formats.
+- Support for Multiple File Formats: Compatible with .csv, parquet, and .tfrecord file formats.
 - Automated Data Processing: Filters and cleans data for efficient visualization.
 
 ## Configuration Requirements
@@ -16,18 +16,23 @@ This tool assumes that you have already generated or extracted landmark points w
 
 Here are some demonstrations of the features and functionalities of the project:
 
-### Feature 1: User Interaction
+### 1: Gift vs Girafee ASL Gesture Visualization
 ![Gift vs Girafee ASL Gesture Visualization](demo/gift_girafee-demo.gif)
 
-### Feature 2: Data Visualization
+### 2: Girlfriend vs Girl ASL Gesture Visualization
 ![Girlfriend vs Girl ASL Gesture Visualization](demo/girlfriend_girl-demo.gif)
 
-### Feature 3: Exporting Data
+### 3: Girlfriend vs Girl ASL Gesture Visualization
 ![Glass vs Glasses ASL Gesture Visualization](demo/glass_glasses-demo.gif)
 
 
 ## Installation
 ```bash
+
+conda create --name data-viz-env python=3.10
+
+conda activate data-viz-env
+
 pip install perennityai-mediapipe-data-viz
 from perennityai-mediapipe-data-viz import DataVisualizer
 ```
@@ -46,7 +51,11 @@ pip install -r requirements.txt
 You can run the visualization tool directly from the command line. Use the following syntax:
 
 ```bash
-python data_visualizer.py --input_file <file_path> --output_dir <output_directory> 
+python data_visualizer.py --input_file <file_path> --output_dir <output_directory> # For CSV --data_input_format not needed!
+python data_visualizer.py --input_dir <file_path> --output_dir <output_directory>  --csv_file_index 0 --data_input_format parquet
+python data_visualizer.py --input_dir <file_path> --output_dir <output_directory>  --tf_file_index 0 --data_input_format tfrecord
+python data_visualizer.py --input_dir <file_path> --output_dir <output_directory>  --parquet_file_index 0 --data_input_format parquet
+
 ```
 
 ## Command-Line Arguments
@@ -57,7 +66,7 @@ python data_visualizer.py --input_file <file_path> --output_dir <output_director
 
 --output_dir: The path where generated visualizations and processed files will be saved (e.g., path/to/output_directory).
 
---data_input_format: Specifies the input file format, typically "csv". This tells the tool what file type to expect in input_file or input_dir.
+--data_input_format: Specifies the input file format, typically "csv" or "tfrecord". This tells the tool what file type to expect in input_file or input_dir.
 
 --verbose: Sets the logging level, which controls the amount of detail in console output. Use "INFO" for general information, "DEBUG" for detailed diagnostic information, or "ERROR" to show only critical errors.
 
@@ -75,7 +84,6 @@ try:
     "input_file": "path/to/mp_landmarks_file/0.csv",
     "input_dir": "path/to/mp_landmarks_file",
     "output_dir": "path/to/output_directory",
-    "data_input_format": "csv",
     "verbose": "INFO",
     'encoding': 'ISO-8859-1' # CSV file encoding
     }

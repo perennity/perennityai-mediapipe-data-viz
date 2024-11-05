@@ -2,6 +2,9 @@
 
 """
 Module Name: perennityai-mediapipe-data-viz
+Author: PerennityAI
+Date: 2024-11-05
+Revision: 1.0.0
 
 Description:
 This module contains the definition of perennityai-mediapipe-data-viz.
