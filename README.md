@@ -11,6 +11,21 @@
 ## Configuration Requirements
 This tool assumes that you have already generated or extracted landmark points with the correct headers specified in the configuration file configs/config.ini. If these landmarks are not yet available, please use ```perennityai-mp-gen``` to extract and save landmark data before running this tool.
 
+
+## Demo
+
+Here are some demonstrations of the features and functionalities of the project:
+
+### Feature 1: User Interaction
+![Gift vs Girafee ASL Gesture Visualization](demo/gift_girafee-demo.gif)
+
+### Feature 2: Data Visualization
+![Girlfriend vs Girl ASL Gesture Visualization](demo/girlfriend_girl-demo.gif)
+
+### Feature 3: Exporting Data
+![Glass vs Glasses ASL Gesture Visualization](demo/glass_glasses-demo.gif)
+
+
 ## Installation
 ```bash
 pip install perennityai-mediapipe-data-viz
