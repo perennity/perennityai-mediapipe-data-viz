@@ -35,10 +35,19 @@ python data_visualizer.py --input_file <file_path> --output_dir <output_director
 ```
 
 ## Command-Line Arguments
---input_file or --input_dir: Path to the input file or directory containing .csv or .tfrecord files.
---output_dir: Directory where animations and visualizations will be saved.
---data_format: Specify csv or tfrecord depending on the input format.
---write: (Optional) If specified, saves the animation to the output directory.
+```bash
+--input_file: Specifies the path to a single MediaPipe landmarks file, typically in .csv format (e.g., path/to/mp_landmarks_file/0.csv). 
+
+--input_dir: Defines the directory path containing multiple MediaPipe landmarks files. 
+
+--output_dir: The path where generated visualizations and processed files will be saved (e.g., path/to/output_directory).
+
+--data_input_format: Specifies the input file format, typically "csv". This tells the tool what file type to expect in input_file or input_dir.
+
+--verbose: Sets the logging level, which controls the amount of detail in console output. Use "INFO" for general information, "DEBUG" for detailed diagnostic information, or "ERROR" to show only critical errors.
+
+--encoding: Defines the file encoding for reading CSV files (e.g., "ISO-8859-1"). 
+```
 
 
 ```python
@@ -80,11 +89,14 @@ except FileNotFoundError as e:
 
 ### DataVisualizer
 Main class to handle data processing and visualization.
-
--- visualize_file: Visualizes data from a specified file by creating an animated view.
+```
+-- visualize_data: Visualizes data from a specified file by creating an animated view.
 get_pose, get_face, get_hands: Methods to extract and visualize specific landmark types.
+
 -- combine_images: Combines separate visualizations into a single, cohesive output.
+
 -- create_animation: Generates an animation from landmark frames.
+```
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
