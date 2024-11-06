@@ -1,21 +1,9 @@
 from setuptools import setup, find_packages
 
-from setuptools import setup, find_packages
 
 setup(
     name='perennityai-viz',
-    version='0.1.0',
-    packages=find_packages(),
-    install_requires=[
-        'matplotlib',  # Add matplotlib to the dependencies list
-        # Add any other dependencies here
-    ],
-)
-
-
-setup(
-    name='perennityai-viz',
-    version='0.1.0.dev6',  # Developmental release (devN)
+    version='0.1.0.dev15',  # Developmental release (devN)
     author='Perennity AI',
     author_email='info@perennityai.com',
     description='A data visualization tool for MediaPipe hand, face, and pose landmarks with Perennity AI enhancements.',
@@ -49,7 +37,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'visualize = perennity_viz.main:main',
+            'perennityai-viz = perennity_viz.main:main',
         ],
     },
     include_package_data=True,

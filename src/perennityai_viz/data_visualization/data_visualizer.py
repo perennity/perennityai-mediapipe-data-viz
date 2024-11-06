@@ -12,9 +12,9 @@ from matplotlib.animation import PillowWriter
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.animation import FuncAnimation
-from utils import TFRecordProcessor
-from utils import CSVHandler
-from utils import Log
+from perennityai_viz.utils import TFRecordProcessor
+from perennityai_viz.utils import CSVHandler
+from perennityai_viz.utils import Log
 
 import configparser
 config = configparser.ConfigParser()
@@ -85,7 +85,7 @@ class DataVisualizer:
         """
         self.input_file = input_file
         self.input_dir = input_dir
-        self.output_dir = os.path.join(output_dir, 'animations')
+        
 
         self.logger = Log(log_file=os.path.join(output_dir,  f"data_visualizer.log"), verbose=verbose)
         
@@ -94,9 +94,10 @@ class DataVisualizer:
         if not os.path.exists(input_file) and not os.path.exists(input_dir):
             raise ValueError("Please, provide input file or input path!")
         
-        if not os.path.exists(self.output_dir):
+        if not os.path.exists(output_dir):
             raise ValueError("Please, provide output_dir!")
-        
+        # Join after verification
+        self.output_dir = os.path.join(output_dir, 'animations')
         # Ensure Path
         os.makedirs(self.output_dir, exist_ok=True)
         

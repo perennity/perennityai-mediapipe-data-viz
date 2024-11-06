@@ -15,7 +15,7 @@ This module contains the definition of perennityai-viz.
 __version__ = "1.0.0"
 
 # Import all modules
-from data_visualization import DataVisualizer
+from perennityai_viz.data_visualization import DataVisualizer
 
 # public classes that are available at the sub-package level
 __all__ = [

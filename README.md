@@ -25,13 +25,13 @@ Ensure that these columns are correctly formatted in the CSV, Parquet, or TFReco
 ```
 perennity-viz/
 │
+│── configs/                           # Central location for all configurations
+|   └── config.ini
+│
 ├── src/                              # All source code in the 'src' folder
 │   └── perennity_viz/                 # Your main package/module
 │       ├── __init__.py               # Initializes the package/module
 │       ├── main.py                   # Entry point for running the program
-│       │
-│       │── configs/                           # Central location for all configurations
-│       |   └── config.ini
 │       │
 │       ├── utils/                    # Utilities folder (for helpers, etc.)
 │       │   ├── __init__.py           # Initializes utils module
@@ -45,8 +45,6 @@ perennity-viz/
 │
 ├── tests/                            # Unit tests and test files
 │   
-│
-│
 ├── MANIFEST.in                       # Specifies additional files for packaging
 ├── pyproject.toml                    # Build system configuration
 ├── setup.py                          # Package setup file
@@ -60,13 +58,13 @@ perennity-viz/
 Here are some demonstrations of the features and functionalities of the project:
 
 ### 1: Gift vs Girafee ASL Gesture Visualization
-![Gift vs Girafee ASL Gesture Visualization](./demo/gift_girafee-demo.gif)
+![Gift vs Girafee ASL Gesture Visualization](https://github.com/perennityai/perennityai-viz/blob/main/demo/gift_girafee-demo.gif)
 
 ### 2: Girlfriend vs Girl ASL Gesture Visualization
-![Girlfriend vs Girl ASL Gesture Visualization](./demo/girlfriend_girl-demo.gif)
+![Girlfriend vs Girl ASL Gesture Visualization](https://github.com/perennityai/perennityai-viz/blob/main/demo/girlfriend_girl-demo.gif)
 
 ### 3: Girlfriend vs Girl ASL Gesture Visualization
-![Glass vs Glasses ASL Gesture Visualization](./demo/glass_glasses-demo.gif)
+![Glass vs Glasses ASL Gesture Visualization](https://github.com/perennityai/perennityai-viz/blob/main/demo/glass_glasses-demo.gif)
 
 
 ## Installation
@@ -83,27 +81,56 @@ pip install -r requirements.txt
 You can run the visualization tool directly from the command line. Use the following syntax:
 
 ```bash
-python main.py --input_file <file_path> --output_dir <output_directory> # For CSV --data_input_format not needed!
-python main.py --input_file <file_path> --output_dir <output_directory> --data_input_format parquet --verbose INFO
-python main.py --input_dir <file_path> --output_dir <output_directory>  --csv_file_index 0 --data_input_format parquet
-python main.py --input_dir <file_path> --output_dir <output_directory>  --tf_file_index 0 --data_input_format tfrecord
-python main.py --input_dir <file_path> --output_dir <output_directory>  --parquet_file_index 0 --data_input_format parquet
+pip install parennity-viz
+
+# Ensure  virtual environment path its in system path
+
+perennityai-viz  --input_file <file_path> --output_dir <output_directory> # For CSV --data_input_format not needed!
+perennityai-viz  --input_file <file_path> --output_dir <output_directory> --data_input_format parquet --verbose INFO
+perennityai-viz  --input_dir <file_path> --output_dir <output_directory>  --csv_file_index 0 --data_input_format parquet
+perennityai-viz  --input_dir <file_path> --output_dir <output_directory>  --tf_file_index 0 --data_input_format tfrecord --show 1
+perennityai-viz --input_dir <file_path> --output_dir <output_directory>  --parquet_file_index 0 --data_input_format parquet
 
 ```
 
 ## Command-Line Arguments
 ```bash
---input_file: Specifies the path to a single MediaPipe landmarks file, typically in .csv format (e.g., path/to/mp_landmarks_file/0.csv). 
+Options:
+  -h, --help            Show this help message and exit.
+  --input_file INPUT_FILE
+                        Specify a single CSV or TFRecord input file.
+  --input_dir INPUT_DIR
+                        Directory containing multiple dataset files to process.
+  --output_dir OUTPUT_DIR
+                        Directory to save generated animation files.
+  --data_input_format {csv,tfrecord,parquet}
+                        Format of input data: "csv", "tfrecord", or "parquet".
+  --csv_file CSV_FILE   Path to a specific CSV file for visualization.
+  --tfrecord_file TFRECORD_FILE
+                        Path to a specific TFRecord file for visualization.
+  --parquet_file PARQUET_FILE
+                        Path to a specific Parquet file for visualization.
+  --csv_file_index CSV_FILE_INDEX
+                        Index of the CSV file within the input directory to visualize.
+  --tf_file_index TF_FILE_INDEX
+                        Index of the TFRecord file within the input directory to visualize.
+  --parquet_file_index PARQUET_FILE_INDEX
+                        Index of the Parquet file within the input directory to visualize.
+  --animation_name ANIMATION_NAME
+                        Custom name for the output animation file.
+  --output_format {.gif,.mp4}
+                        Format for the animation output, such as ".gif" or ".mp4".
+  --write WRITE         Option to save the generated animation in the specified output directory.
+  --verbose {DEBUG,ERROR,WARNING}
+                        Set logging level for output.
+  --encoding ENCODING   Encoding format for CSV files.
 
---input_dir: Defines the directory path containing multiple MediaPipe landmarks files. 
+  --show: Displays animation in the browser
 
---output_dir: The path where generated visualizations and processed files will be saved (e.g., path/to/output_directory).
+This tool leverages `FuncAnimation` to create frame-by-frame animations from data.
 
---data_input_format: Specifies the input file format, typically "csv" or "tfrecord". This tells the tool what file type to expect in input_file or input_dir.
 
---verbose: Sets the logging level, which controls the amount of detail in console output. Use "INFO" for general information, "DEBUG" for detailed diagnostic information, or "ERROR" to show only critical errors.
 
---encoding: Defines the file encoding for reading CSV files (e.g., "ISO-8859-1"). 
 ```
 
 
