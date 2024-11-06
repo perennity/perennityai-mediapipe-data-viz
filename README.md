@@ -25,9 +25,6 @@ Ensure that these columns are correctly formatted in the CSV, Parquet, or TFReco
 ```
 perennity-viz/
 │
-│── configs/                           # Central location for all configurations
-|   └── config.ini
-│
 ├── src/                              # All source code in the 'src' folder
 │   └── perennity_viz/                 # Your main package/module
 │       ├── __init__.py               # Initializes the package/module
@@ -37,6 +34,7 @@ perennity-viz/
 │       │   ├── __init__.py           # Initializes utils module
 │       │   ├── csv_handler.py        # Handles CSV file operations
 │       │   ├── tfrecord_processor.py # Handles TFRecord file operations
+│       │   ├── feature_header.py     # The points labels for all landmarks
 │       │   └── logger.py             # Logger configuration and functions
 │       │
 │       └── data_visualization/       # Folder for data visualization related code
