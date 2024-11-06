@@ -12,16 +12,14 @@ This module contains the definition of utils.
 __version__ = "1.0.0"
 
 # Import all functions
-from .csv_to_tfrecord_reader import CSVtoTFRecordConverter
 from .csv_handler import CSVHandler
 from .logger import Log
-from .tfrecord_reader import TFCSVRecordReader
+from .tfrecord_processor import TFRecordProcessor
 
 
 # public classes that are available at the sub-package level
 __all__ = [
-           'CSVtoTFRecordConverter', 
            'CSVHandler',
            'Log',
-           'TFCSVRecordReader',
+           'TFRecordProcessor',
            ]
