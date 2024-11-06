@@ -15,12 +15,9 @@ from matplotlib.animation import FuncAnimation
 from perennityai_viz.utils import TFRecordProcessor
 from perennityai_viz.utils import CSVHandler
 from perennityai_viz.utils import Log
+from perennityai_viz.utils import get_header
 
-import configparser
-config = configparser.ConfigParser()
-config.read('configs/config.ini')
-
-ALL_FEATURE_COLUMNS = config['all_features']['ALL_FEATURE_COLUMNS'].split('\t')
+header = get_header().split('\t')
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -356,9 +353,12 @@ class DataVisualizer:
         if not images:
             raise ValueError("The images list cannot be empty.")
 
-        fig = plt.figure(figsize=(10, 10))
+        bg_color = '#030012'
+        fig = plt.figure(figsize=(8, 8)) # Set the figure size with width and height (in inches)
+        fig.patch.set_facecolor(bg_color)  # Set figure background color (light gray here)
         ax = plt.Axes(fig, [0., 0., 1., 1.])
         ax.set_axis_off()
+        ax.set_facecolor(bg_color)         # Set axis background color (light blue here)
         fig.add_axes(ax)
         im = ax.imshow(images[0])
         plt.close(fig)
@@ -490,7 +490,7 @@ class DataVisualizer:
         self.logger.debug("tf to dr landmark shape : ", landmark_tf.shape)
 
         phrase = phrase_list[0].numpy().decode('utf-8')
-        landmarks = pd.DataFrame(landmark_tf.numpy(), columns=ALL_FEATURE_COLUMNS)
+        landmarks = pd.DataFrame(landmark_tf.numpy(), columns=header)
         return landmarks, phrase
 
     def read_tf_sample_file_with_index(self, file_index=0):
@@ -574,7 +574,7 @@ class DataVisualizer:
         The resulting DataFrame is cast to float32 for consistency.
         """
         # Read the CSV file into a DataFrame
-        seq_df = self.csv.read_parquet_file(parquet_file, columns=['phrase'] + ALL_FEATURE_COLUMNS)
+        seq_df = self.csv.read_parquet_file(parquet_file, columns=['phrase'] + header)
         phrase = seq_df.iloc[0]['phrase']
 
         self.logger.debug("index ", seq_df.index)

@@ -15,6 +15,7 @@ __version__ = "1.0.0"
 from .csv_handler import CSVHandler
 from .logger import Log
 from .tfrecord_processor import TFRecordProcessor
+from .feature_header import get_header
 
 
 # public classes that are available at the sub-package level

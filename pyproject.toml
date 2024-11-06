@@ -3,7 +3,7 @@
 [project]
 name = "perennityai-viz"
 
-version = "0.1.0.dev15"  # Developmental release (devN)
+version = "0.1.0.dev20"  # Developmental release (devN)
 description = "A Python tool for visualizing MediaPipe landmark data from CSV, Parquet, and TFRecord formats."
 authors = [
     { name = "Perennity AI", email = "info@perennityai.com" }
