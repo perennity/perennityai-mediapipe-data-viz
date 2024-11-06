@@ -1,15 +1,29 @@
 from setuptools import setup, find_packages
 
+from setuptools import setup, find_packages
+
 setup(
-    name='perennityai-mediapipe-data-viz',
+    name='perennityai-viz',
     version='0.1.0',
+    packages=find_packages(),
+    install_requires=[
+        'matplotlib',  # Add matplotlib to the dependencies list
+        # Add any other dependencies here
+    ],
+)
+
+
+setup(
+    name='perennityai-viz',
+    version='0.1.0.dev6',  # Developmental release (devN)
     author='Perennity AI',
-    author_email='contact@perennityai.com',
+    author_email='info@perennityai.com',
     description='A data visualization tool for MediaPipe hand, face, and pose landmarks with Perennity AI enhancements.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/perennityai/perennityai-mediapipe-data-viz',
-    packages=find_packages(),
+    url='https://github.com/perennityai/perennityai-viz',
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -23,15 +37,19 @@ setup(
     ],
     python_requires='>=3.8',
     install_requires=[
-        'matplotlib>=3.4',
-        'opencv-python-headless>=4.5',
-        'mediapipe>=0.8',
-        'pandas>=1.3',
-        'numpy>=1.21',
+        'tensorflow>=2.5.0,<=2.17.0', 
+        "tensorboard>=2.5.0,<=2.17.0",
+        "keras",
+        'matplotlib',
+        "matplotlib",
+        "opencv-python",
+        "json5 ",
+        "pandas",
+        "mediapipe"
     ],
     entry_points={
         'console_scripts': [
-            'perennityai-mediapipe-data-viz=perennityai_mediapipe_data_viz.cli:main',
+            'visualize = perennity_viz.main:main',
         ],
     },
     include_package_data=True,
