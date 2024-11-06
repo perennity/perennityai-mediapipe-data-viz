@@ -8,11 +8,10 @@ import tensorflow as tf
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-import configparser
-config = configparser.ConfigParser()
-config.read('configs/config.ini')
+from .feature_header import get_header
 
-ALL_FEATURE_COLUMNS = config['all_features']['ALL_FEATURE_COLUMNS'].split('\t')
+ALL_FEATURE_COLUMNS = get_header().split('\t')
+
 
 class TFRecordProcessor:
     """

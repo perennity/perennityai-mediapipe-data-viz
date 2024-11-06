@@ -31,8 +31,12 @@ def open_animation_in_browser(animation: FuncAnimation):
         logo_path = 'https://perennityai.com/_next/image?url=%2Fimg%2Fperennity.png&w=128&q=75'
         # Add CSS and logo to center the animation
         centered_html = f"""
-         <html>
+        <!DOCTYPE html>
+        <html lang="en">
         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>PerennityAI MediaPipe Visualization Animation</title>
             <style>
                 body {{
                     display: flex;
@@ -41,14 +45,14 @@ def open_animation_in_browser(animation: FuncAnimation):
                     align-items: center;
                     height: 100vh;
                     margin: 0;
-                    background-color: #f0f0f0;
+                    background-color: #030012;
                     font-family: Arial, sans-serif;
                     position: relative;
                 }}
                 #logo {{
                     position: absolute;
                     top: 20px;
-                    left: 20px;
+                    left: 30px;
                     z-index: 10;
                     text-align: center;
                 }}
@@ -58,14 +62,14 @@ def open_animation_in_browser(animation: FuncAnimation):
                 }}
                 #logo-text {{
                     font-size: 20px;
-                    color: #333;
+                    color: #c3c0d8;
                     margin-top: 10px;
                     font-weight: bold;
                 }}
                 #animation {{
-                    max-width: 100%;
-                    max-height: 100%;
-                    z-index: 1;
+                    max-width: 100%; /* Sets a maximum width */
+                    max-height: 100%; /* Maintains aspect ratio */
+                    width: auto;
                 }}
             </style>
         </head>

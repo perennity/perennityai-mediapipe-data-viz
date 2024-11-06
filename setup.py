@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='perennityai-viz',
-    version='0.1.0.dev15',  # Developmental release (devN)
+    version='0.1.0.dev20',  # Developmental release (devN)
     author='Perennity AI',
     author_email='info@perennityai.com',
     description='A data visualization tool for MediaPipe hand, face, and pose landmarks with Perennity AI enhancements.',
