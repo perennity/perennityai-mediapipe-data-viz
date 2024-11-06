@@ -368,6 +368,7 @@ class DataVisualizer:
             ax.clear()  # Clear previous image before drawing new one
             ax.imshow(images[i], animated=True)
             ax.set_title(title)  # Set the title for each frame
+            ax.set_title(f"Visualization of {title}", color="#c3c0d8", fontsize=24)
             return [ax]
 
         return FuncAnimation(fig, animate_func, frames=len(images), interval=1000/10)
