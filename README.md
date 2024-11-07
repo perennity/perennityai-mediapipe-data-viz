@@ -9,7 +9,7 @@
 - Automated Data Processing: Filters and cleans data for efficient visualization.
 
 ## Configuration Requirements
-This tool assumes that you have already generated or extracted landmark points with the correct headers specified in the configuration file configs/config.ini. If these landmarks are not yet available, please use ```perennityai-mp-gen``` to extract and save landmark data before running this tool.
+This tool assumes that you have already generated or extracted landmark points with the correct headers specified in the configuration file configs/config.ini. If these landmarks are not yet available, please use ```perennityai-mp-extract``` to extract and save landmark data before running this tool.
 
 ## Data Requirements
 The tool expects the following columns to be present in all input files:
@@ -132,7 +132,7 @@ This tool leverages `FuncAnimation` to create frame-by-frame animations from dat
 ```
 
 
-```python
+```bash
 
 conda create --name data-viz-env python=3.10
 
@@ -140,6 +140,9 @@ conda activate data-viz-env
 
 pip install perennityai-viz
 from perennity_viz.data_visualization.data_visualizer import DataVisualizer
+```
+
+```python
 
 # Usage Example: Load from a pretrained configuration file
 try:
